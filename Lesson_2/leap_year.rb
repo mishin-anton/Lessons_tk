@@ -18,10 +18,11 @@ if (year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0)
   days_in_months[1] = 29
 end
 
-days_in_months[0..month-1].each do |m|
-  if month-1 != 0
+month_in_arr = month - 1
+days_in_months[0..month_in_arr].each do |m|
+  if month_in_arr != 0
     number_of_date += m
-    month = month - 1
+    month_in_arr -= 1
   end
 end
 
