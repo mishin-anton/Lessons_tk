@@ -18,17 +18,16 @@
 class Train
 
   attr_accessor :quantity
-  attr_reader :number, :type, :speed, :current_station
-
-  @@current_station = ""
-  @@current_position = nil
+  attr_reader :number, :type, :speed
 
   def initialize (number, type, quantity)
     @number = number
     @type = type
     @quantity = quantity
     @speed = 0
-    @route = nil
+    @route
+    @current_station # удалить
+    @current_position
   end
 
   def speed_up (acceleration)
@@ -44,19 +43,17 @@ class Train
   end
 
   def remove_wag
-    @quantity -= 1 if @speed == 0
+    @quantity -= 1 if @speed == 0 && @quantity > 0
   end
 
   def add_route(route)
     @route = route
-    @@current_station = @route.route_list[0].station_name
-    @@current_position = 0
+    @current_position = 0
   end
 
   def move_forward
-    if @@current_position >= 0 && @@current_position <= @route.route_list.size-2
-      @@current_position += 1
-      @@current_station = @route.route_list[@@current_position].station_name
+    if @current_position >= 0 && @current_position <= @route.stations.size-2
+      @current_position += 1
     else
       puts "can't move forward"
     end
@@ -65,24 +62,24 @@ class Train
   def move_back
     if @@current_position > 0
       @@current_position -= 1
-      @@current_station = @route.route_list[@@current_position].station_name
-      puts @@current_station
     else
       puts "can't move back"
     end
   end
 
-  def return_stations
-    current_station = @route.route_list[@@current_position]
+  def get_current_station
+    return current_station = @route.stations[@current_position]
+  end
 
-    if @@current_position > 0
-      previous_station = @route.route_list[@@current_position-1]
+  def get_previous_station
+    if @current_position > 0
+      return previous_station = @route.stations[@current_position-1]
     end
+  end
 
-    if @@current_position < @route.route_list.size-1
-      next_station = @route.route_list[@@current_position+1]
+  def get_next_station
+    if @current_position < @route.stations.size-1
+      return next_station = @route.stations[@current_position+1]
     end
-
-    return current_station, previous_station, next_station
   end
 end

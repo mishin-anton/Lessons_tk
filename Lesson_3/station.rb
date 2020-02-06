@@ -8,42 +8,29 @@
 # списка поездов, находящихся на станции).
 
 class Station
-    attr_accessor :station_name
+  attr_accessor :name
 
-  def initialize(station_name)
-    @station_name = station_name
-    @train_list = []
+  def initialize(name)
+    @name = name
+    @trains = []
   end
 
   def add_train(train)
-    @train_list << train
+    @trains << train
   end
 
   def send_train(train)
-    @train_list.delete (train)
-
+    @trains.delete(train)
   end
 
-  def show_train_list
-    puts "Вагоны на станции #{@station_name}: "
-    @train_list.each { |train| puts train.number }
+  def show_trains
+    puts "Вагоны на станции #{@name}: "
+    @trains.each { |train| puts train.number }
   end
 
-  def show_train_list_by_type
-    type_cargo = 0
-    type_passenger = 0
-    error_type = 0
-
-    @train_list.each do |train|
-      if train.type == "грузовой"
-        type_cargo += 1
-      elsif train.type == "пассажирский"
-        type_passenger += 1
-      else error_type += 1
-    end
-  end
-
-    puts "Грузовых вагонов на станции: #{type_cargo}"
-    puts "Пассажирских вагонов на станции: #{type_passenger}"
+  def show_trains_by_type(type)
+    @typelist = []
+    @trains.each { |train| @typelist << train.type }
+    puts "Количество #{type} вагонов: #{@typelist.count(type)}"
   end
 end

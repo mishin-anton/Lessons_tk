@@ -9,23 +9,29 @@ load 'station.rb'
 # Может выводить список всех станций по-порядку от начальной до конечной
 
 class Route
-  attr_reader :route_name, :route_list
+  attr_reader :name, :stations
 
-  def initialize (route_name, base_station, end_station)
-    @route_name = route_name
-    @route_list = [base_station, end_station]
+  def initialize (base_station, end_station)
+    @name = "#{base_station.name} - #{end_station.name}"
+    @stations = [base_station, end_station]
+    @base_station = base_station
+    @end_station = end_station
   end
 
   def add_interval_station(station)
-    @route_list.insert(-2, station)
+    if station != @base_station && station != @end_station
+      @stations.insert(-2, station)
+    end
   end
 
   def delete_interval_station(station)
-    @route_list.delete(station)
+    if station != @base_station && station != @end_station
+      @stations.delete(station)
+    end
   end
 
   def show_route
-    puts "Маршрут #{@route_name}: "
-    @route_list.each { |station| print "->#{station.station_name} " }
+    puts "Маршрут #{@name}: "
+    @stations.each { |station| print "->#{station.name} " }
   end
 end

@@ -9,7 +9,7 @@ station_kuncevo = Station.new("Кунцево")
 station_bryansk = Station.new("Брянск")
 station_partizansk = Station.new("Партизанск")
 
-route_europe_asia = Route.new("Европа-Азия", station_bryansk, station_partizansk)
+route_europe_asia = Route.new(station_bryansk, station_partizansk)
 route_europe_asia.add_interval_station(station_kuncevo)
 route_europe_asia.add_interval_station(station_lublino)
 
@@ -21,12 +21,14 @@ rgd_msk_partizansk = Train.new("44976378", "пассажирский", 23)
 puts "\nИНФОРМАЦИЯ ПО СТАНЦИЯМ"
 station_lublino.add_train(cargo_trk)
 station_lublino.add_train(cargo_transmash)
-station_lublino.show_train_list
-station_lublino.show_train_list_by_type
+station_lublino.add_train(rgd_msk_bryansk)
+station_lublino.show_trains
+station_lublino.show_trains_by_type("грузовой")
+station_lublino.show_trains_by_type("пассажирский")
 
 puts "Отправить поезд 55689688 со станции Люблино"
 station_lublino.send_train(cargo_trk)
-station_lublino.show_train_list
+station_lublino.show_trains
 
 puts "\nИНФОРМАЦИЯ ПО МАРШРУТАМ"
 route_europe_asia.show_route
@@ -55,4 +57,6 @@ cargo_trk.move_forward
 cargo_trk.move_forward
 # cargo_trk.move_back
 
-cargo_trk.return_stations
+puts "Текущая станция: #{cargo_trk.get_current_station.name}"
+puts "Предыдущая станция: #{cargo_trk.get_previous_station.name}"
+puts "Текущая станция: #{cargo_trk.get_next_station}"
