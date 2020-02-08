@@ -68,18 +68,18 @@ class Train
   end
 
   def get_current_station
-    return current_station = @route.stations[@current_position]
+    current_station = @route.stations[@current_position]
   end
 
   def get_previous_station
     if @current_position > 0
-      return previous_station = @route.stations[@current_position-1]
+      previous_station = @route.stations[@current_position-1]
     end
   end
 
   def get_next_station
     if @current_position < @route.stations.size-1
-      return next_station = @route.stations[@current_position+1]
+      next_station = @route.stations[@current_position+1]
     end
   end
 end

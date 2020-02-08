@@ -29,8 +29,7 @@ class Station
   end
 
   def show_trains_by_type(type)
-    @typelist = []
-    @trains.each { |train| @typelist << train.type }
+    @typelist = @trains.map { |train| train.type }
     puts "Количество #{type} вагонов: #{@typelist.count(type)}"
   end
 end

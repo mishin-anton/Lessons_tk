@@ -13,6 +13,8 @@ route_europe_asia = Route.new(station_bryansk, station_partizansk)
 route_europe_asia.add_interval_station(station_kuncevo)
 route_europe_asia.add_interval_station(station_lublino)
 
+route_europe_asia.add_interval_station(station_partizansk)
+
 cargo_trk = Train.new("55689688", "грузовой", 20)
 cargo_transmash = Train.new("55889900", "грузовой", 35)
 rgd_msk_bryansk = Train.new("88904477", "пассажирский", 17)
