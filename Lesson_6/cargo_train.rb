@@ -1,4 +1,8 @@
+require_relative 'validate'
+
 class CargoTrain < Train
+  include Validate
+
   attr_reader :wagons
 
   NUMBER_FORMAT = /^[a-zA-z0-9]{3}[-|\s]{1}[a-zA-z0-9]{2}/

@@ -67,12 +67,12 @@ loop do
         elsif type == '2'
           @trains << PassengerTrain.new(number)
         else
-          raise "Неверно выбран тип"
+          puts "Неверно выбран тип"
         end
-    rescue StandardError
-      puts "Неверный формат ввода (повторите ввод)"
-      retry
-    end
+      rescue Exception => e
+        puts e
+        retry
+      end
     puts "Создан поезд #{number}"
 
   when '3'

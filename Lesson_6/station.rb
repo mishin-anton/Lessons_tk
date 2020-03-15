@@ -1,7 +1,9 @@
 require_relative 'instancecounter'
+require_relative 'validate'
 
 class Station
   include InstanceCounter
+  include Validate
 
   def self.all
     @all ||= []
@@ -34,13 +36,6 @@ class Station
   def show_trains_by_type(type)
     @typelist = @trains.map { |train| train.type }
     puts "Количество #{type} вагонов: #{@typelist.count(type)}"
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
   end
 
   protected

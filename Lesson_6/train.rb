@@ -1,11 +1,13 @@
 require_relative 'manufacturer'
 require_relative 'instancecounter'
+require_relative 'validate'
 
 class Train
   include Manufacturer
   include InstanceCounter
+  include Validate
 
-  NUMBER_FORMAT = /^[a-zA-z0-9]{3}[-|\s]{1}[a-zA-z0-9]{2}/
+  NUMBER_FORMAT = /^[a-zA-z0-9]{3}-?[a-zA-z0-9]{2}/
   MOVE_FORWARD_ERROR = "Can't move forward"
   MOVE_BACK_ERROR = "Can't move back"
 
@@ -95,16 +97,9 @@ class Train
     @wagons.each { |wagon| puts wagon.number}
   end
 
-  def valid?
-    validate!
-    true
-  rescue
-    false
-  end
-
   protected
 
   def validate!
-    raise "Number has invalid format" if number !~ NUMBER_FORMAT
+    raise "Error Number has invalid format" if number !~ NUMBER_FORMAT
   end
 end

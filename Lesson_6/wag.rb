@@ -1,7 +1,9 @@
 require_relative 'manufacturer'
+require_relative 'validate'
 
 class Wag
   include Manufacturer
+  include Validate
 
   attr_accessor :number, :type
 
@@ -11,13 +13,6 @@ class Wag
     @number = number
     @type = type
     validate!
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
   end
 
   protected

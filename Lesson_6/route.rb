@@ -1,8 +1,10 @@
 require_relative 'instancecounter'
 require_relative 'station.rb'
+require_relative 'validate'
 
 class Route
   include InstanceCounter
+  include Validate
 
   attr_reader :name, :stations
 
@@ -37,13 +39,6 @@ class Route
     puts "Маршрут #{@name}: "
     @stations.each { |station| print "->#{station.name} " }
     puts ''
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
   end
 
   protected

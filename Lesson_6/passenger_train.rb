@@ -1,4 +1,8 @@
+require_relative 'validate'
+
 class PassengerTrain < Train
+  include Validate
+
   def initialize (number)
     @number = number
     @type = "пассажирский"
@@ -8,13 +12,6 @@ class PassengerTrain < Train
 
   def add_wag (wag)
     @wagons << wag
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
   end
 
   protected

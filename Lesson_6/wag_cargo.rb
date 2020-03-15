@@ -1,18 +1,14 @@
+require_relative 'validate'
+
 class CargoWag < Wag
+  include Validate
 
-NUMBER_FORMAT = /^[0-9]{5}/
+  NUMBER_FORMAT = /^[0-9]{5}/
 
-def initialize (number)
+  def initialize (number)
     @number = number
     @type = "грузовой"
     validate!
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
   end
 
   protected

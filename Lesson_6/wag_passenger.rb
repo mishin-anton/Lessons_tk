@@ -1,4 +1,7 @@
+require_relative 'validate'
+
 class PassengerWag < Wag
+  include Validate
 
   NUMBER_FORMAT = /^[0-9]{5}/
 
@@ -6,13 +9,6 @@ class PassengerWag < Wag
     @number = number
     @type = "пассажирский"
     validate!
-  end
-
-  def valid?
-    validate!
-    true
-  rescue
-    false
   end
 
   protected
