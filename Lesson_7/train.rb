@@ -97,7 +97,7 @@ class Train
     @wagons.each { |wagon| puts wagon.number}
   end
 
-  def process_wags(block)
+  def each_wag(block)
     @wagons.each do |wag|
       yield(wag)
     end

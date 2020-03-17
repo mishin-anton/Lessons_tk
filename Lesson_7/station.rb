@@ -38,7 +38,7 @@ class Station
     puts "Количество #{type} вагонов: #{@typelist.count(type)}"
   end
 
-  def process_trains(block)
+  def each_train(block)
     @trains.each do |train|
       yield(train)
     end

@@ -199,9 +199,9 @@ loop do
       puts "#{train.number} - #{train.type}"
       train.wagons.each do |wag|
         if wag.type == "грузовой"
-          puts "№ #{wag.number} - тип: #{wag.type} - доступный V: #{wag.get_free_volume} - занятый V: #{wag.busy_volume}"
+          puts "№ #{wag.number} - тип: #{wag.type} - доступный V: #{wag.get_free_space} - занятый V: #{wag.busy_space}"
         elsif wag.type == "пассажирский"
-          puts "№: #{wag.number} - тип: #{wag.type} - достуно мест: #{wag.get_free_seats} - занято мест: #{wag.get_busy_seats}"
+          puts "№: #{wag.number} - тип: #{wag.type} - достуно мест: #{wag.get_free_space} - занято мест: #{wag.get_busy_space}"
         end
       end
     end
@@ -238,15 +238,15 @@ loop do
       train.wagons.each do |wag|
         if selected_wag == wag.number
           if wag.type == "грузовой"
-            puts "Введите объем для загрузки (Доступный объем: #{wag.get_free_volume})"
+            puts "Введите объем для загрузки (Доступный объем: #{wag.get_free_space})"
             volume = gets.chomp.to_i
-            wag.take_volume(volume)
+            wag.load_space(volume)
           elsif wag.type == "пассажирский"
             puts "Занято, если было свободное"
-            wag.take_seat
+            wag.load_space
           end
         else
-          puts "No matches"
+          puts ""
         end
       end
     end

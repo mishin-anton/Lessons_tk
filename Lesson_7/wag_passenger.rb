@@ -3,33 +3,18 @@ require_relative 'validate'
 class PassengerWag < Wag
   include Validate
 
-  attr_reader :total_seats
-  attr_accessor :free_seats, :busy_seats
+  attr_reader :total_space
+  attr_accessor :free_space, :busy_space
 
   NUMBER_FORMAT = /^[0-9]{5}/
 
-  def initialize (number, total_seats)
+  def initialize (number, total_space)
     @number = number
     @type = "пассажирский"
-    @total_seats = total_seats
-    @free_seats = @total_seats
-    @busy_seats = 0
+    @total_space = total_space
+    @free_space = @total_space
+    @busy_space = 0
     validate!
-  end
-
-  def take_seat
-    if @busy_seats < @total_seats
-      @busy_seats = @busy_seats + 1
-      @free_seats = @free_seats - 1
-    end
-  end
-
-  def get_busy_seats
-    @busy_seats
-  end
-
-  def get_free_seats
-    @free_seats
   end
 
   protected
