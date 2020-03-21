@@ -15,7 +15,7 @@ class Train
   MOVE_FORWARD_ERROR = "Can't move forward"
   MOVE_BACK_ERROR = "Can't move back"
 
-  @trains = {}
+  @@trains = {}
 
   def self.find(number)
     @trains[number]

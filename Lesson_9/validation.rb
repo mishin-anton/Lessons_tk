@@ -19,8 +19,8 @@ module Validation
     attr_reader :parameters
 
     def self.validate(attr, validation_type, options = {})
-      @parameters ||= {}
-      @parameters[attr.to_sym] ||= []
+      @parameters ||= []
+      @parameters[attr.to_sym] ||= {}
       @parameters[attr.to_sym] << { validation_type => options }
     end
   end
@@ -44,17 +44,17 @@ module Validation
       false
     end
 
-    def presence(attr, presence)
+    def validate_presence(attr, presence)
       raise "Name can't be empty" if attr ||= empty?
     end
 
-    def format(attr, options)
+    def validate_format(attr, options)
       options.each do |format, format_val|
         raise "Error Number has invalid format" if attr !~ format_val
       end
     end
 
-    def type(attr, options)
+    def validate_type(attr, options)
       options.each do |value|
         raise "Attribute has invalid type" unless value.is_a? type
       end
