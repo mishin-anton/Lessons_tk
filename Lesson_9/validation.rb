@@ -16,20 +16,19 @@ module Validation
   end
 
   module ClassMethods
-    attr_reader :parameters
+    attr_reader :validations
 
-    def self.validate(attr, validation_type, options = {})
-      @parameters ||= []
-      @parameters[attr.to_sym] ||= {}
-      @parameters[attr.to_sym] << { validation_type => options }
+    def self.validate(attr, type, options = {})
+      @validations ||= []
+      @validations << { attr: attr, type: type, options: options }
     end
   end
 
   module InstanceMethods
     def validate!
-      return if hash_empty?(self.class.parameters)
+      return if hash_empty?(self.class.validations)
 
-      self.class.parameters.each do |attr, array|
+      self.class.validations.each do |attr, array|
         instance = instance_variable_get("@#{attr}")
         array.each do |hash|
           hash.each { |type, options| send(type, instance, options) }

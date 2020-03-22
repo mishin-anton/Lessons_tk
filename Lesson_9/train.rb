@@ -18,7 +18,7 @@ class Train
   @@trains = {}
 
   def self.find(number)
-    @trains[number]
+    @@trains[number]
   end
 
   attr_reader :number, :route, :type
