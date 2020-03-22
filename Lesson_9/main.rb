@@ -134,7 +134,7 @@ while selected != 0
     rescue StandardError => e
       puts e
       retry
-      end
+    end
     puts "Создан поезд #{number}"
 
   when '3'

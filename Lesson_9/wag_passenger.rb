@@ -10,6 +10,8 @@ class PassengerWag < Wag
 
   NUMBER_FORMAT = /^[0-9]{5}/.freeze
 
+  validate :number, :validate_format, NUMBER_FORMAT
+
   def initialize(number, total_space)
     @number = number
     @type = 'пассажирский'

@@ -15,13 +15,15 @@ class Train
   MOVE_FORWARD_ERROR = "Can't move forward"
   MOVE_BACK_ERROR = "Can't move back"
 
+  validate :number, :validate_format, NUMBER_FORMAT
+
   @@trains = {}
 
   def self.find(number)
     @@trains[number]
   end
 
-  attr_reader :number, :route, :type
+  attr_reader :number, :route, :type, :wagons
   attr_accessor_with_history :speed
   strong_attr_accessor :number, Integer
 

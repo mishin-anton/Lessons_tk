@@ -7,6 +7,8 @@ class Station
   include InstanceCounter
   include Validation
 
+  validate :name, :validate_presence
+
   def self.all
     @all ||= []
   end

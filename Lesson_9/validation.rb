@@ -18,7 +18,7 @@ module Validation
   module ClassMethods
     attr_reader :validations
 
-    def self.validate(attr, type, options = {})
+    def validate(attr, type, options = {})
       @validations ||= []
       @validations << { attr: attr, type: type, options: options }
     end
@@ -28,11 +28,9 @@ module Validation
     def validate!
       return if hash_empty?(self.class.validations)
 
-      self.class.validations.each do |attr, array|
-        instance = instance_variable_get("@#{attr}")
-        self.class.validation.each do |hash|
-          send(hash[:type], hash[:attr], hash[:options])
-        end
+      self.class.validations.each do |hash|
+        instance = instance_variable_get("@#{hash[:attr]}")
+        send(hash[:type], instance, hash[:options])
       end
     end
 
@@ -44,13 +42,11 @@ module Validation
     end
 
     def validate_presence(attr, presence)
-      raise "Name can't be empty" if attr ||= empty?
+      raise "Name can't be empty" if attr.empty?
     end
 
-    def validate_format(attr, options)
-      options.each do |format, format_val|
-        raise "Error Number has invalid format" if attr !~ format_val
-      end
+    def validate_format(attr, format)
+      raise "Error Number has invalid format" if attr !~ format
     end
 
     def validate_type(attr, options)
