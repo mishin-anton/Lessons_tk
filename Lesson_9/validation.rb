@@ -30,8 +30,8 @@ module Validation
 
       self.class.validations.each do |attr, array|
         instance = instance_variable_get("@#{attr}")
-        array.each do |hash|
-          hash.each { |type, options| send(type, instance, options) }
+        self.class.validation.each do |hash|
+          send(hash[:type], hash[:attr], hash[:options])
         end
       end
     end
